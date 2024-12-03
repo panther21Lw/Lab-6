@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Request Handler</title>
+</head>
+<body>
+    <h1>HTTP Request Handler</h1>
+
+    <!-- POST FORM -->
+    <form method="post" action="login">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required>
+        <button type="submit">Sumbit</button>
+    </form>
+
+    <br>
+
+    <!-- GET FORM -->
+    <form method="get" action="login">
+        <button type="submit">Say HELLO</button>
+    </form>
+
+    <br>
+
+    <!-- Patch Form -->
+    <form method="post" action="patch">
+        <label for="newName">New Name: </label>
+        <input type="text" id="newName" name="newName" required>
+        <button type="submit">Update my Name</button>
+    </form>
+
+    <br>
+
+    <!-- DELETE FORM -->
+    <form method="post" action="delete">
+        <button type="submit">Delete ALL info</button>
+    </form>
+</body>
+</html>

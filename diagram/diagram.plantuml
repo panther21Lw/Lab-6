@@ -1,0 +1,63 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class DeleteRequestHandler {
+  + DeleteRequestHandler(): 
+  + handle(HttpServletRequest, HttpServletResponse): void
+}
+class DeleteServlet {
+  + DeleteServlet(): 
+  # doPost(HttpServletRequest, HttpServletResponse): void
+}
+class GetRequestHandler {
+  + GetRequestHandler(): 
+  + handle(HttpServletRequest, HttpServletResponse): void
+}
+interface HandleStrategy << interface >> {
+  + handle(HttpServletRequest, HttpServletResponse): void
+}
+class LoginServlet {
+  + LoginServlet(): 
+  # doPost(HttpServletRequest, HttpServletResponse): void
+  # doPatch(HttpServletRequest, HttpServletResponse): void
+  # doDelete(HttpServletRequest, HttpServletResponse): void
+  # doGet(HttpServletRequest, HttpServletResponse): void
+}
+class PatchServlet {
+  + PatchServlet(): 
+  # doPost(HttpServletRequest, HttpServletResponse): void
+}
+class PostRequestHandler {
+  + PostRequestHandler(): 
+  + handle(HttpServletRequest, HttpServletResponse): void
+}
+class RequestHandler {
+  + RequestHandler(HandleStrategy): 
+   strategy: HandleStrategy
+}
+class UpdateRequestHandler {
+  + UpdateRequestHandler(): 
+  + handle(HttpServletRequest, HttpServletResponse): void
+}
+
+DeleteRequestHandler  -[#008200,dashed]-^  HandleStrategy       
+DeleteServlet         -[#595959,dashed]->  DeleteRequestHandler : "«create»"
+DeleteServlet        "1" *-[#595959,plain]-> "requestHandler\n1" RequestHandler       
+DeleteServlet         -[#595959,dashed]->  RequestHandler       : "«create»"
+GetRequestHandler     -[#008200,dashed]-^  HandleStrategy       
+LoginServlet          -[#595959,dashed]->  DeleteRequestHandler : "«create»"
+LoginServlet          -[#595959,dashed]->  GetRequestHandler    : "«create»"
+LoginServlet          -[#595959,dashed]->  PostRequestHandler   : "«create»"
+LoginServlet         "1" *-[#595959,plain]-> "requestHandler\n1" RequestHandler       
+LoginServlet          -[#595959,dashed]->  RequestHandler       : "«create»"
+LoginServlet          -[#595959,dashed]->  UpdateRequestHandler : "«create»"
+PatchServlet          -[#595959,dashed]->  RequestHandler       : "«create»"
+PatchServlet         "1" *-[#595959,plain]-> "requestHandler\n1" RequestHandler       
+PatchServlet          -[#595959,dashed]->  UpdateRequestHandler : "«create»"
+PostRequestHandler    -[#008200,dashed]-^  HandleStrategy       
+RequestHandler       "1" *-[#595959,plain]-> "handleStrategy\n1" HandleStrategy       
+UpdateRequestHandler  -[#008200,dashed]-^  HandleStrategy       
+@enduml
